@@ -13,25 +13,35 @@ UCLASS()
 class TOONTANKS_API ATank : public ABasePawn
 {
 	GENERATED_BODY()
-	
-	public:
 
+public:
 	ATank();
 
-		// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
 
-private: 
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
 
-UPROPERTY(VisibleAnywhere, Category = "Components")
-class USpringArmComponent* SpringArm;
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
-UPROPERTY(VisibleAnywhere, Category = "Components")
-class UCameraComponent* Camera;
+private:
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	class USpringArmComponent* SpringArm;
 
-UPROPERTY(EditAnywhere, Category = "Movement")
-float Speed = 200.f;
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	class UCameraComponent* Camera;
 
-void Move(float Value);
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float Speed = 200.f;
 
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float TurnRate = 45.f;
+
+	void Move(float Value);
+	void Turn(float Value);
+
+	APlayerController* PlayerControllerRef;
 };
