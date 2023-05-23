@@ -7,27 +7,26 @@
 #include "Tower.h"
 #include "ToonTanksPlayerController.h"
 
-	void AToonTanksGameMode::ActorDied(AActor* DeadActor)
+void AToonTanksGameMode::ActorDied(AActor *DeadActor)
+{
+    if (DeadActor == Tank)
     {
-        if (DeadActor == Tank)
+        Tank->HandleDestruction();
+        if (ToonTanksPlayerController)
         {
-            Tank->HandleDestruction();
-            if (ToonTanksPlayerController)
-            {
-                ToonTanksPlayerController->SetPlayerEnabledState(false);
-            }
-            
-        }
-        else if (ATower* DestroyedTower = Cast<ATower>(DeadActor))
-        {
-            DestroyedTower->HandleDestruction();
+            ToonTanksPlayerController->SetPlayerEnabledState(false);
         }
     }
+    else if (ATower* DestroyedTower = Cast<ATower>(DeadActor))
+    {
+        DestroyedTower->HandleDestruction();
+    }
+}
 
 void AToonTanksGameMode::BeginPlay()
 {
     Super::BeginPlay();
 
-    Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this,0));
+    Tank = Cast<ATank>(UGameplayStatics::GetPlayerPawn(this, 0));
     ToonTanksPlayerController = Cast<AToonTanksPlayerController>(UGameplayStatics::GetPlayerController(this, 0));
 }

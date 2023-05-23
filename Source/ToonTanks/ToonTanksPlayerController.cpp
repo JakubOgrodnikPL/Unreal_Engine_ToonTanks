@@ -4,7 +4,7 @@
 #include "ToonTanksPlayerController.h"
 #include "GameFramework/Pawn.h"
 
-void AToonTanksPlayerController::SetPlayerEnabledState(bool bPlayerEnabled);
+void AToonTanksPlayerController::SetPlayerEnabledState(bool bPlayerEnabled)
 {
     if (bPlayerEnabled)
     {
@@ -16,4 +16,3 @@ void AToonTanksPlayerController::SetPlayerEnabledState(bool bPlayerEnabled);
     }
     bShowMouseCursor = bPlayerEnabled;
 }
-
