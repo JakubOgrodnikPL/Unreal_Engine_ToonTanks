@@ -10,3 +10,11 @@
  - Added Health and Damage
  - Added Damage and Death handling
  - Managed Projectile
+
+05.06.2023 - Project Finished
+
+Potential ToDos:
+- InLevel Menu
+- Interactive grass
+- New Levels
+- Health Bar
